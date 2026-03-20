@@ -1,5 +1,17 @@
 local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
+local protectTags() = orgs.newRepoRuleset('tags-protection') {
+  target: 'tag',
+  include_refs: [
+    '~ALL',
+  ],
+  allows_creations: true,
+  allows_deletions: false,
+  allows_updates: false,
+  required_pull_request: null,
+  required_status_checks: null,
+};
+
 orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
   settings+: {
     description: "The Eclipse OpenVSX project",
@@ -30,13 +42,21 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
       ],
       rulesets: [
         orgs.newRepoRuleset('default') {
-          allows_creations: true,
           include_refs+: [
             "~DEFAULT_BRANCH"
           ],
-          required_pull_request: null,
-          required_status_checks: null,
+          bypass_actors+: [
+            '@eclipse-openvsx/ecd-openvsx-project-leads',
+          ],
+          required_pull_request+: {
+            required_approving_review_count: 1,
+            requires_last_push_approval: true,
+            requires_review_thread_resolution: true,
+            dismisses_stale_reviews: true,
+          },
+          requires_linear_history: true,
         },
+        protectTags(),
       ],
       environments: [
         orgs.newEnvironment('copilot'),
