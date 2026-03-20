@@ -2,7 +2,7 @@ local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
 orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
   settings+: {
-    description: "",
+    description: "The Eclipse OpenVSX project",
     name: "Eclipse Open VSX",
     workflows+: {
       actions_can_approve_pull_request_reviews: false,
@@ -11,7 +11,6 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
   _repositories+:: [
     orgs.newRepo('openvsx') {
       default_branch: "master",
-      delete_branch_on_merge: false,
       dependabot_security_updates_enabled: true,
       description: "An open-source registry for VS Code extensions",
       has_projects: false,
@@ -25,9 +24,6 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
         "vscode"
       ],
       secrets: [
-        orgs.newRepoSecret('DEVELOCITY_API_TOKEN') {
-          value: "********",
-        },
         orgs.newRepoSecret('SONAR_TOKEN') {
           value: "********",
         },
