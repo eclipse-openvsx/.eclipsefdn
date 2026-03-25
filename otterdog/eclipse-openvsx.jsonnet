@@ -2,6 +2,7 @@ local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
 local protectTags() = orgs.newRepoRuleset('tags-protection') {
   target: 'tag',
+  enforcement: 'evaluate',
   include_refs: [
     '~ALL',
   ],
