@@ -23,7 +23,6 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
   },
   _repositories+:: [
     orgs.newRepo('openvsx') {
-      default_branch: "master",
       dependabot_security_updates_enabled: true,
       description: "An open-source registry for VS Code extensions",
       has_projects: false,
