@@ -43,7 +43,9 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
       rulesets: [
         orgs.newRepoRuleset('default') {
           include_refs+: [
-            "~DEFAULT_BRANCH"
+            "~DEFAULT_BRANCH",
+            "refs/heads/1.2.x",
+            "refs/heads/1.3.x"
           ],
           bypass_actors+: [
             '@eclipse-openvsx/ecd-openvsx-project-leads',
@@ -69,3 +71,4 @@ orgs.newOrg('ecd.openvsx', 'eclipse-openvsx') {
     orgs.newRepo('.github')
   ],
 }
+
